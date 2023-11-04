@@ -1,5 +1,3 @@
-use require_lifetimes::require_lifetimes;
-
 /// This function takes in a "vector" of `&strs`, a "loc" `usize`
 /// and a "new" `&str`. Your job is to replace the old string at the
 /// location (i.e., array index) "loc" with the "new" one.  Don't do
@@ -30,9 +28,9 @@ use require_lifetimes::require_lifetimes;
 /// // Hopefully, they're now equal
 /// assert_eq!(message , vec!["Hello", "Your", "Name", "Is", "Unknown"]);
 /// ````
-#[require_lifetimes(!)]
-pub fn vector_set(vector: &mut Vec<&str>, loc: usize, new: &str) {
-    // TODO: You will need to write this code yourself.
-    //       Don't worry, it's only one line long.
-    todo!()
+pub fn vector_set<'a>(vector: &mut Vec<&'a str>, loc: usize, new: &'a str) {
+    match loc {
+        loc if loc < vector.len() => vector[loc] = new,
+        _ => (),
+    }
 }
